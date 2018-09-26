@@ -1,0 +1,15 @@
+﻿@page "/"
+@model Backend.Pages.SpaModel
+@{
+    Layout = "_Layout";
+    ViewData["Title"] = "DiaryApp";
+}
+
+<div id="app"></div>
+
+@section Scripts {
+    <script>
+        var initData = @Json.Serialize(Model.InitData);
+    </script>
+    <script src="bundle.js"></script>
+}

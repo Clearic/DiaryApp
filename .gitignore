@@ -1,0 +1,10 @@
+node_modules/
+dist/
+bin/
+obj/
+wwwroot/
+AppData/
+data/
+.vs/
+*.suo
+*.user

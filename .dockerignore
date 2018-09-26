@@ -1,0 +1,10 @@
+/Frontend/node_modules
+/Frontend/dist
+/Frontend/bin
+/Frontend/obj
+/Frontend/wwwroot
+/Frontend/AppData
+/.vs
+/data
+*.suo
+*.user
