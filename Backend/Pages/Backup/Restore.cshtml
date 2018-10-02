@@ -1,0 +1,22 @@
+﻿@page
+@model Backend.Pages.Backup.RestoreModel
+@{
+    ViewData["Title"] = "Restore";
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+
+
+<div class="bar bar-main">
+    <a class="bar-button" asp-page="/Index">Notes</a>
+</div>
+
+<div class="container content">
+    <h1 class="h1">Restore Notes</h1>
+    <div>
+        <form method="post" enctype="multipart/form-data">
+            <input type="file" asp-for="Upload" />
+            <button class="button" type="submit">Upload</button>
+        </form>
+        <p>Warning: this will erase all your existing notes.</p>
+    </div>
+</div>

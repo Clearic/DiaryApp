@@ -9,21 +9,21 @@
         <h1>Register</h1>
 
         <form method="post">
-            <div asp-validation-summary="All" class="auth-validation-msg"></div>
+            <div asp-validation-summary="All" class="validation-msg"></div>
             <div>
-                <input asp-for="Input.UserName" class="auth-input" placeholder="@Html.DisplayNameFor(x => x.Input.UserName)" />
-                <span asp-validation-for="Input.UserName" class="auth-validation-msg"></span>
+                <input asp-for="Input.UserName" class="input-big" placeholder="@Html.DisplayNameFor(x => x.Input.UserName)" />
+                <span asp-validation-for="Input.UserName" class="validation-msg"></span>
             </div>
             <div>
-                <input asp-for="Input.Password" class="auth-input" placeholder="@Html.DisplayNameFor(x => x.Input.Password)" />
-                <span asp-validation-for="Input.Password" class="auth-validation-msg"></span>
+                <input asp-for="Input.Password" class="input-big" placeholder="@Html.DisplayNameFor(x => x.Input.Password)" />
+                <span asp-validation-for="Input.Password" class="validation-msg"></span>
             </div>
             <div>
-                <input asp-for="Input.ConfirmPassword" class="auth-input" placeholder="@Html.DisplayNameFor(x => x.Input.ConfirmPassword)" />
-                <span asp-validation-for="Input.ConfirmPassword" class="auth-validation-msg"></span>
+                <input asp-for="Input.ConfirmPassword" class="input-big" placeholder="@Html.DisplayNameFor(x => x.Input.ConfirmPassword)" />
+                <span asp-validation-for="Input.ConfirmPassword" class="validation-msg"></span>
             </div>
             <div>
-                <button type="submit" class="auth-button">Register</button>
+                <button type="submit" class="button-big">Register</button>
             </div>
         </form>
     </div>

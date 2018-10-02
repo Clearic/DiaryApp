@@ -43,7 +43,7 @@ namespace Backend.Controllers
                 return BadRequest(ModelState);
             }
 
-            var notes = notesRepo.GetNotesByDate(GetUserId(), fromDate, toDate)
+            var notes = notesRepo.GetNotesByDate(Utils.GetUserId(HttpContext), fromDate, toDate)
                 .OrderBy(x => x.Date)
                 .Select(x => new NoteResultModel(x))
                 .ToList();
@@ -58,7 +58,7 @@ namespace Backend.Controllers
             if (note == null) 
                 return NotFound($"Note {id} not found");
 
-            if (note.UserId != GetUserId())
+            if (note.UserId != Utils.GetUserId(HttpContext))
                 return BadRequest("You are not authorized to see this note");
 
             return Ok(new NoteResultModel(note));
@@ -80,7 +80,7 @@ namespace Backend.Controllers
             {
                 Date = date,
                 Text = model.Text,
-                UserId = GetUserId(),
+                UserId = Utils.GetUserId(HttpContext),
                 Created = now,
                 Modified = now
             };
@@ -99,7 +99,7 @@ namespace Backend.Controllers
             if (note == null) 
                 return NotFound($"Note {id} not found");
 
-            if (note.UserId != GetUserId())
+            if (note.UserId != Utils.GetUserId(HttpContext))
                 return BadRequest("You are not authorized to change this note");
 
             if (model.Date != null) {
@@ -123,24 +123,12 @@ namespace Backend.Controllers
             if (note == null) 
                 return NotFound($"Note {id} not found");
 
-            if (note.UserId != GetUserId())
+            if (note.UserId != Utils.GetUserId(HttpContext))
                 return BadRequest("You are not authorized to delete this note");
 
             notesRepo.DeleteNote(note);
 
             return Ok();
-        }
-
-        string GetUserId() 
-        {
-            var nameIdentifierClaim = User.Claims
-                .Where(x => x.Type == ClaimTypes.NameIdentifier)
-                .FirstOrDefault();
-
-            if (nameIdentifierClaim == null)
-                throw new Exception("No NameIdentifier claim");
-
-            return nameIdentifierClaim.Value;
         }
     }
 }

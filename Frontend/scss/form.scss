@@ -1,0 +1,75 @@
+.h1 {
+    font-size: 2.5rem;
+    margin-bottom: 1.0rem;
+    font-weight: 500;
+    line-height: 1.2;
+    color: #2e2e2e;
+    border-bottom: 1px solid #e1e4e8;
+}
+
+.container {
+    max-width: 960px;
+    width: 100%;
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.content {
+    padding-top: 1rem;
+}
+
+.button {
+    background-color: white;
+    border: 1px solid #ccc;
+    padding: 0.4rem 0.7rem;
+    font-size: 1rem;
+    color: #202020;
+    text-decoration: none;
+
+    &:not(:disabled) {
+        cursor: pointer;
+    }
+
+    &:hover:not(:disabled) {
+        background-color: #f7f7f7;
+    }
+
+    &:active:not(:disabled) {
+        background-color: #eee;
+    }
+
+    &:disabled {
+        opacity: 0.7;
+    }
+}
+
+.button-big {
+    @extend .button;
+
+    font-size: 1.5rem;
+}
+
+.input {
+    display: block;
+    line-height: 1.4rem;
+    border: 1px solid #ccc;
+    padding: 0.4rem 0.7rem;
+    width: 100%;
+    font-size: 1rem;
+    color: #202020;
+}
+
+.input-big {
+    @extend .input;
+
+    font-size: 1.5rem;
+}
+
+.validation-msg {
+    color: #dc3545;
+    font-size: 0.9rem;
+    margin-top: 0.2rem;
+    margin-left: 0.1rem;
+}

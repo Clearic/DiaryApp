@@ -27,7 +27,7 @@ namespace Backend.Pages
             var today = DateTime.Today;
 
             var notes = notesRepo.GetNotesByDate(
-                GetUserId(),
+                Utils.GetUserId(HttpContext),
                 new DateTime(today.Year, today.Month, 1),
                 new DateTime(today.Year, today.Month, DateTime.DaysInMonth(today.Year, today.Month)));
 
@@ -40,18 +40,6 @@ namespace Backend.Pages
                 },
                 notes = notes.Select(x => new NoteResultModel(x)).ToList()
             };
-        }
-
-        string GetUserId()
-        {
-            var nameIdentifierClaim = User.Claims
-                .Where(x => x.Type == ClaimTypes.NameIdentifier)
-                .FirstOrDefault();
-
-            if (nameIdentifierClaim == null)
-                throw new Exception("No NameIdentifier claim");
-
-            return nameIdentifierClaim.Value;
         }
     }
 }
