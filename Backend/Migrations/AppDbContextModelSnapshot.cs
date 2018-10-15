@@ -18,7 +18,7 @@ namespace Backend.Migrations
 
             modelBuilder.Entity("Backend.Models.Note", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<string>("Id")
                         .ValueGeneratedOnAdd();
 
                     b.Property<DateTime>("Created");

@@ -6,7 +6,7 @@ namespace Backend.Models
 {
     public interface INotesRepository
     {
-        Note GetById(int id);
+        Note GetById(string id);
         List<Note> GetAllNotes(string userId);
         List<Note> GetNotesByDate(string userId, DateTime? from, DateTime? to);
         void CreateNote(Note note);

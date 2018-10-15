@@ -15,7 +15,7 @@ namespace Backend.Models
             this.db = context;
         }
 
-        public Note GetById(int id)
+        public Note GetById(string id)
         {
             return db.Notes.FirstOrDefault(x => x.Id == id);
         }
@@ -43,8 +43,9 @@ namespace Backend.Models
 
         public void CreateNote(Note note)
         {
-            note.Date = note.Date;
             var now = DateTime.Now;
+            note.Id = Guid.NewGuid().ToString();
+            note.Date = note.Date;
             note.Created = now;
             note.Modified = now;
             db.Notes.Add(note);

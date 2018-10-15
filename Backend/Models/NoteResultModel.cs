@@ -13,7 +13,7 @@ namespace Backend.Models
             Text = note.Text;
         }
 
-        public int Id { get; set; }
+        public string Id { get; set; }
         public string Date { get; set; }
         public string Text { get; set; }
     }

@@ -156,8 +156,7 @@ namespace Backend.Migrations
                 name: "Notes",
                 columns: table => new
                 {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
+                    Id = table.Column<string>(nullable: false),
                     UserId = table.Column<string>(nullable: false),
                     Date = table.Column<DateTime>(nullable: false),
                     Text = table.Column<string>(nullable: false),

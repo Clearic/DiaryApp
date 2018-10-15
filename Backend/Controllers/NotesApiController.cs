@@ -3,6 +3,7 @@ using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
 using Backend.Models;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 
 namespace Backend.Controllers
 {
@@ -52,8 +53,11 @@ namespace Backend.Controllers
         }
 
         [HttpGet("{id}", Name = "GetNote")]
-        public IActionResult GetNote(int id)
+        public IActionResult GetNote([FromQuery] string id)
         {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
             var note = notesRepo.GetById(id);
             if (note == null) 
                 return NotFound($"Note {id} not found");
@@ -90,7 +94,7 @@ namespace Backend.Controllers
         }
 
         [HttpPut("{id}")]
-        public IActionResult UpdateNote(int id, [FromBody] NoteUpdateModel model)
+        public IActionResult UpdateNote([FromQuery] string id, [FromBody] NoteUpdateModel model)
         {
             if (!ModelState.IsValid) 
                 return BadRequest(ModelState);
@@ -117,7 +121,7 @@ namespace Backend.Controllers
         }
 
         [HttpDelete("{id}")]
-        public IActionResult DeleteNote(int id)
+        public IActionResult DeleteNote([FromQuery] string id)
         {
             var note = notesRepo.GetById(id);
             if (note == null) 

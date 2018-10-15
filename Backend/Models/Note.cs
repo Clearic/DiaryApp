@@ -5,7 +5,7 @@ namespace Backend.Models
 {
     public class Note
     {
-        public int Id { get; set; }
+        public string Id { get; set; }
         [Required]
         public string UserId { get; set; }
         public User User { get; set; }

@@ -41,6 +41,7 @@ namespace Backend.Models
                         string text = entryStream.ReadToEnd();
                         notes.Add(new Note()
                         {
+                            Id = Guid.NewGuid().ToString(),
                             UserId = userId,
                             Date = date,
                             Text = text,
