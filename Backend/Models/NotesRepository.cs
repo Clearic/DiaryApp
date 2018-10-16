@@ -43,11 +43,7 @@ namespace Backend.Models
 
         public void CreateNote(Note note)
         {
-            var now = DateTime.Now;
             note.Id = Guid.NewGuid().ToString();
-            note.Date = note.Date;
-            note.Created = now;
-            note.Modified = now;
             db.Notes.Add(note);
             db.SaveChanges();
         }
@@ -60,8 +56,6 @@ namespace Backend.Models
 
         public void UpdateNote(Note note)
         {
-            note.Date = note.Date;
-            note.Modified = DateTime.Now;
             db.Entry(note).State = EntityState.Modified;
             db.SaveChanges();
         }

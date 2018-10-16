@@ -79,7 +79,7 @@ namespace Backend.Controllers
                 return BadRequest(ModelState);
             }
 
-            var now = DateTime.Now;
+            var now = DateTime.UtcNow;
             var note = new Note() 
             {
                 Date = date,
@@ -115,7 +115,7 @@ namespace Backend.Controllers
             }
 
             note.Text = model.Text ?? note.Text;
-            note.Modified = DateTime.Now;
+            note.Modified = DateTime.UtcNow;
             notesRepo.UpdateNote(note);
             return Ok();
         }
