@@ -15,11 +15,11 @@ namespace Backend.Pages.Backup
 {
     public class RestoreModel : PageModel
     {
-        private readonly AppDbContext db;
+        private readonly INotesRepository repo;
 
-        public RestoreModel(AppDbContext db)
+        public RestoreModel(INotesRepository repo)
         {
-            this.db = db;
+            this.repo = repo;
         }
 
         [BindProperty]
@@ -37,9 +37,8 @@ namespace Backend.Pages.Backup
                 var userId = Utils.GetUserId(HttpContext);
                 var notes = BackupUtils.ReadNotesBackup(stream, userId);
 
-                db.Database.ExecuteSqlCommand("DELETE FROM \"Notes\" WHERE \"UserId\" = {0}", userId);
-                db.Notes.AddRange(notes);
-                db.SaveChanges();
+                repo.DeleteAllNotes(userId);
+                repo.CreateNotes(notes);
 
                 return Redirect("/");
             }

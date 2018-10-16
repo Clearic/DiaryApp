@@ -17,11 +17,11 @@ namespace Backend.Pages.Backup
     [IgnoreAntiforgeryToken(Order = 1001)]
     public class DownloadModel : PageModel
     {
-        private readonly AppDbContext db;
+        private readonly INotesRepository repo;
 
-        public DownloadModel(AppDbContext db)
+        public DownloadModel(INotesRepository repo)
         {
-            this.db = db;
+            this.repo = repo;
         }
 
         public void OnGet()
@@ -32,7 +32,7 @@ namespace Backend.Pages.Backup
         public IActionResult OnPost()
         {
             var userId = Utils.GetUserId(HttpContext);
-            var notes = db.Notes.Where(x => x.UserId == userId).ToList();
+            var notes = repo.GetAllNotes(userId);
 
             var stream = new MemoryStream();
 

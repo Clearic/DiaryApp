@@ -52,6 +52,12 @@ namespace Backend.Models
             db.SaveChanges();
         }
 
+        public void CreateNotes(ICollection<Note> notes)
+        {
+            db.Notes.AddRange(notes);
+            db.SaveChanges();
+        }
+
         public void UpdateNote(Note note)
         {
             note.Date = note.Date;
@@ -64,6 +70,11 @@ namespace Backend.Models
         {
             db.Notes.Remove(note);
             db.SaveChanges();
+        }
+
+        public void DeleteAllNotes(string userId)
+        {
+            db.Database.ExecuteSqlCommand("DELETE FROM \"Notes\" WHERE \"UserId\" = {0}", userId);
         }
     }
 }

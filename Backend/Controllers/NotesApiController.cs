@@ -53,7 +53,7 @@ namespace Backend.Controllers
         }
 
         [HttpGet("{id}", Name = "GetNote")]
-        public IActionResult GetNote([FromQuery] string id)
+        public IActionResult GetNote(string id)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
@@ -94,7 +94,7 @@ namespace Backend.Controllers
         }
 
         [HttpPut("{id}")]
-        public IActionResult UpdateNote([FromQuery] string id, [FromBody] NoteUpdateModel model)
+        public IActionResult UpdateNote(string id, [FromBody] NoteUpdateModel model)
         {
             if (!ModelState.IsValid) 
                 return BadRequest(ModelState);
@@ -121,7 +121,7 @@ namespace Backend.Controllers
         }
 
         [HttpDelete("{id}")]
-        public IActionResult DeleteNote([FromQuery] string id)
+        public IActionResult DeleteNote(string id)
         {
             var note = notesRepo.GetById(id);
             if (note == null) 

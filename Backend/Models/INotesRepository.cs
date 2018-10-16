@@ -10,7 +10,9 @@ namespace Backend.Models
         List<Note> GetAllNotes(string userId);
         List<Note> GetNotesByDate(string userId, DateTime? from, DateTime? to);
         void CreateNote(Note note);
+        void CreateNotes(ICollection<Note> notes);
         void UpdateNote(Note note);
         void DeleteNote(Note note);
+        void DeleteAllNotes(string userId);
     }
 }
