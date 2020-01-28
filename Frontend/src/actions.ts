@@ -1,66 +1,78 @@
 import { Note, Month, DateTime } from "./store";
 
+export const NEW_NOTE = "NewNote";
+
 export interface NewNote {
-    type: "NewNote";
+    type: typeof NEW_NOTE;
     date?: DateTime;
 }
 
 export function newNote(date?: DateTime): NewNote {
     return {
-        type: "NewNote",
+        type: NEW_NOTE,
         date
     };
 }
 
+export const OPEN_NOTE = "OpenNote";
+
 export interface OpenNote {
-    type: "OpenNote";
+    type: typeof OPEN_NOTE;
     note: Note;
 }
 
 export function openNote(note: Note): OpenNote {
     return {
-        type: "OpenNote",
+        type: OPEN_NOTE,
         note
     };
 }
 
+export const CLOSE_DIALOG = "CloseDialog";
+
 export interface CloseDialog {
-    type: "CloseDialog";
+    type: typeof CLOSE_DIALOG;
 }
 
 export function closeDialog(): CloseDialog {
     return {
-        type: "CloseDialog"
+        type: CLOSE_DIALOG
     };
 }
 
+export const SCROLL_TO_CURRENT_WEEK = "ScrollToCurrentWeek";
+
 export interface ScrollToCurrentWeek {
-    type: "ScrollToCurrentWeek";
+    type: typeof SCROLL_TO_CURRENT_WEEK;
 }
 
 export function scrollToCurrentWeek(): ScrollToCurrentWeek {
     return {
-        type: "ScrollToCurrentWeek"
+        type: SCROLL_TO_CURRENT_WEEK
     };
 }
 
 // Requests
 
+export const LOAD_NOTES_REQUEST = "LoadNotesRequest";
+
 export interface LoadNotesRequest {
-    type: "LoadNotesRequest";
+    type: typeof LOAD_NOTES_REQUEST;
     reqID: number;
     month: Month;
 }
 
 export function loadNotesRequest(reqID: number, month: Month): LoadNotesRequest {
     return {
-        type: "LoadNotesRequest",
+        type: LOAD_NOTES_REQUEST,
         reqID, month
     };
 }
 
+export const LOAD_NOTES_SUCCESS = "LoadNotesSuccess";
+
 export interface LoadNotesSuccess {
-    type: "LoadNotesSuccess";
+    type: typeof LOAD_NOTES_SUCCESS;
     reqID: number;
     month: Month;
     notes: Note[];
@@ -68,13 +80,15 @@ export interface LoadNotesSuccess {
 
 export function loadNotesSuccess(reqID: number, month: Month, notes: Note[]): LoadNotesSuccess {
     return {
-        type: "LoadNotesSuccess",
+        type: LOAD_NOTES_SUCCESS,
         reqID, month, notes
     };
 }
 
+export const CREATE_NOTE_REQUEST = "CreateNoteRequest";
+
 export interface CreateNoteRequest {
-    type: "CreateNoteRequest";
+    type: typeof CREATE_NOTE_REQUEST;
     reqID: number;
     date: DateTime;
     text: string;
@@ -82,26 +96,30 @@ export interface CreateNoteRequest {
 
 export function createNoteRequest(reqID: number, date: DateTime, text: string): CreateNoteRequest {
     return {
-        type: "CreateNoteRequest",
+        type: CREATE_NOTE_REQUEST,
         reqID, date, text
     };
 }
 
+export const CREATE_NOTE_SUCCESS = "CreateNoteSuccess";
+
 export interface CreateNoteSuccess {
-    type: "CreateNoteSuccess";
+    type: typeof CREATE_NOTE_SUCCESS;
     reqID: number;
     note: Note;
 }
 
 export function createNoteSuccess(reqID: number, note: Note): CreateNoteSuccess {
     return {
-        type: "CreateNoteSuccess",
+        type: CREATE_NOTE_SUCCESS,
         reqID, note
     };
 }
 
+export const UPDATE_NOTE_REQUEST = "UpdateNoteRequest";
+
 export interface UpdateNoteRequest {
-    type: "UpdateNoteRequest";
+    type: typeof UPDATE_NOTE_REQUEST;
     reqID: number;
     note: Note;
     oldDate: DateTime;
@@ -109,13 +127,15 @@ export interface UpdateNoteRequest {
 
 export function updateNoteRequest(reqID: number, note: Note, oldDate: DateTime): UpdateNoteRequest {
     return {
-        type: "UpdateNoteRequest",
+        type: UPDATE_NOTE_REQUEST,
         reqID, note, oldDate
     };
 }
 
+export const UPDATE_NOTE_SUCCESS = "UpdateNoteSuccess";
+
 export interface UpdateNoteSuccess {
-    type: "UpdateNoteSuccess";
+    type: typeof UPDATE_NOTE_SUCCESS;
     reqID: number;
     note: Note;
     oldDate: DateTime;
@@ -123,33 +143,37 @@ export interface UpdateNoteSuccess {
 
 export function updateNoteSuccess(reqID: number, note: Note, oldDate: DateTime): UpdateNoteSuccess {
     return {
-        type: "UpdateNoteSuccess",
+        type: UPDATE_NOTE_SUCCESS,
         reqID, note, oldDate
     };
 }
 
+export const DELETE_NOTE_REQUEST = "DeleteNoteRequest";
+
 export interface DeleteNoteRequest {
-    type: "DeleteNoteRequest";
+    type: typeof DELETE_NOTE_REQUEST;
     reqID: number;
     note: Note;
 }
 
 export function deleteNoteRequest(reqID: number, note: Note): DeleteNoteRequest {
     return {
-        type: "DeleteNoteRequest",
+        type: DELETE_NOTE_REQUEST,
         reqID, note
     };
 }
 
+export const DELETE_NOTE_SUCCESS = "DeleteNoteSuccess";
+
 export interface DeleteNoteSuccess {
-    type: "DeleteNoteSuccess";
+    type: typeof DELETE_NOTE_SUCCESS;
     reqID: number;
     note: Note;
 }
 
 export function deleteNoteSuccess(reqID: number, note: Note): DeleteNoteSuccess {
     return {
-        type: "DeleteNoteSuccess",
+        type: DELETE_NOTE_SUCCESS,
         reqID, note
     };
 }

@@ -1,5 +1,5 @@
 import { Note, MonthNotes, DayNotes, Day } from "../store";
-import { Action } from "../actions";
+import { Action, LOAD_NOTES_SUCCESS, CREATE_NOTE_SUCCESS, UPDATE_NOTE_SUCCESS, DELETE_NOTE_SUCCESS } from "../actions";
 import { Reducer } from "redux";
 import { getMonthKey, getDayKey, isDateTimeEqual, isDateTimeLess } from "../date";
 
@@ -44,15 +44,15 @@ function removeNote(state: DayNotes = {}, id: number, date: Day) {
 
 export const notesReducer: Reducer<MonthNotes> = (state: MonthNotes = {}, action: Action) => {
     switch (action.type) {
-        case "LoadNotesSuccess": {
+        case LOAD_NOTES_SUCCESS: {
             const monthKey = getMonthKey(action.month);
             return {...state, [monthKey]: makeDayNotes(action.notes)};
         }
-        case "CreateNoteSuccess": {
+        case CREATE_NOTE_SUCCESS: {
             const monthKey = getMonthKey(action.note.date);
             return {...state, [monthKey]: addNote(state[monthKey], action.note)};
         }
-        case "UpdateNoteSuccess": {
+        case UPDATE_NOTE_SUCCESS: {
             const monthKey = getMonthKey(action.note.date);
             const oldMonthKey = getMonthKey(action.oldDate);
             const newState = {
@@ -61,7 +61,7 @@ export const notesReducer: Reducer<MonthNotes> = (state: MonthNotes = {}, action
             };
             return {...newState, [monthKey]: addNote(newState[monthKey], action.note)};
         }
-        case "DeleteNoteSuccess": {
+        case DELETE_NOTE_SUCCESS: {
             const monthKey = getMonthKey(action.note.date);
             const newState = {
                 ...state,
