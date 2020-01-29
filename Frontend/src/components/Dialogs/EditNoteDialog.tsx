@@ -2,11 +2,7 @@ import * as Actions from "../../actions";
 import * as Thunks from "../../thunks";
 import { Note } from "../../store";
 import { getTitle } from "../../utils";
-import {
-    dateToFromStr,
-    timeToFromStr,
-    isDateTimeEqual
-} from "../../date";
+import { dateToFromStr, timeToFromStr, isDateTimeEqual } from "../../date";
 import { BaseNoteDialogComponent, BaseNoteDialogProps, BaseNoteDialogState } from "./BaseNoteDialog";
 
 export interface EditNoteDialogProps extends BaseNoteDialogProps {

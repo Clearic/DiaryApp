@@ -2,9 +2,7 @@ import * as Actions from "../../actions";
 import * as Thunks from "../../thunks";
 import { DateTime } from "../../store";
 import { isEmptyOrSpaces, getTitle } from "../../utils";
-import {
-    dateToFromStr,
-    timeToFromStr} from "../../date";
+import { dateToFromStr, timeToFromStr} from "../../date";
 import { BaseNoteDialogComponent, BaseNoteDialogProps, BaseNoteDialogState } from "./BaseNoteDialog";
 
 export interface CreateNoteDialogProps extends BaseNoteDialogProps {
@@ -31,7 +29,7 @@ export class CreateNoteDialogComponenet extends BaseNoteDialogComponent<CreateNo
         this.props.dispatch(Thunks.createNote(date, this.state.text));
     }
     componentDidMount() {
-        super.componentDidMount();
+        // super.componentDidMount();
         //this.textarea.focus();
     }
 }
