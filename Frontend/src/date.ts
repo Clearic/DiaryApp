@@ -206,6 +206,10 @@ export function isDateTimeLess(dt1: DateTime, dt2: DateTime) {
     return false;
 }
 
+export const isFutureDate = (date: Day): boolean => {
+    return isDayGreater(date, getCurrentDateTime());
+}
+
 export function parseDateTime(str: string): DateTime {
     const regex = /(\d+)-(\d+)-(\d+) (\d+):(\d+)/;
     const m = regex.exec(str);
@@ -236,11 +240,11 @@ export function dateToFromStr(date: Day) {
     return `${date.year}-${month}-${day}`;
 }
 
-export function parseFormDate(str: string): Day {
+export function parseFormDate(str: string): Day | null {
     const regex = /(\d+)-(\d+)-(\d+)/;
     const m = regex.exec(str);
     if (!m)
-        throw Error(`Failed to parse date ${str}`);
+        return null;
     return {
         year: parseInt(m[1], 10),
         month: parseInt(m[2], 10),
@@ -254,11 +258,11 @@ export function timeToFromStr(time: Time) {
     return `${hours}:${minutes}`;
 }
 
-export function parseFormTime(str: string): Time {
+export function parseFormTime(str: string): Time | null {
     const regex = /(\d+):(\d+)/;
     const m = regex.exec(str);
     if (!m)
-        throw Error(`Failed to parse time ${str}`);
+        return null;
     return {
         hours: parseInt(m[1], 10),
         minutes: parseInt(m[2], 10)

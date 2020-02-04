@@ -7,7 +7,7 @@ export function Dialog(props: React.PropsWithChildren<{}>) {
             document.body.setAttribute("class", "");
         };
     }, []);
-    
+
     return (
         <section className="dialog-back">
             <div className="dialog">
