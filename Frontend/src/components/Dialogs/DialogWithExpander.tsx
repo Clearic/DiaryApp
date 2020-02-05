@@ -30,7 +30,9 @@ export const DialogWithExpander: React.FC<DialogWithExpanderProps> = (props) => 
                     {props.expanderArea}
                 </div>
             }
-            {props.contentArea}
+            <div className="content">
+                {props.contentArea}
+            </div>
         </Dialog>
     );
 }
