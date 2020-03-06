@@ -1,13 +1,45 @@
 import * as React from "react";
-import { MonthNotes } from "../store";
+import { MonthNotes, DayNotes } from "../store";
 import * as Actions from "../actions";
-import { getMonthKey, getMonthName} from "../date";
-import { WeekComponent } from "./Week";
+import { getMonthKey, getMonthName } from "../date";
+import { DayComponent } from "./Day";
+
+interface MonthProps {
+    readonly year: number;
+    readonly month: number;
+    readonly notes: DayNotes;
+    dispatch(action: Actions.Action): Actions.Action;
+}
+
+export const MonthComponent: React.FC<MonthProps> = ({ year, month, notes, dispatch }) => {
+    const weeks = getWeeks(year, month);
+
+    return (
+        <table className="month">
+            <caption>{getMonthName(month)} {year}</caption>
+            <tbody>
+                {weeks.map((week, weekIndex) =>
+                    <tr key={weekIndex}>
+                        {week.map((day, dayIndex) =>
+                            <DayComponent
+                                key={dayIndex}
+                                year={year}
+                                month={month}
+                                day={day}
+                                notes={notes}
+                                dispatch={dispatch}
+                            />)}
+                    </tr>
+                )}
+            </tbody>
+        </table>
+    );
+}
 
 function getWeeks(year: number, month: number) {
     const day = new Date(year, month - 1);
     let offset = day.getDay();
-    offset = (offset + 6) % 7; // make monday first day of week
+    offset = (offset + 6) % 7;
 
     const weeks: Array<Array<number | undefined>> = [];
 
@@ -19,7 +51,7 @@ function getWeeks(year: number, month: number) {
                 week.push(undefined);
             } else if (day.getMonth() === month - 1) {
                 week.push(day.getDate());
-                day.setDate(day.getDate() + 1); // adds 1 day
+                day.setDate(day.getDate() + 1);
             } else {
                 week.push(undefined);
             }
@@ -27,37 +59,4 @@ function getWeeks(year: number, month: number) {
         weeks.push(week);
     }
     return weeks;
-}
-
-interface MonthComponentProps {
-    readonly year: number;
-    readonly month: number;
-    readonly notes: MonthNotes;
-    readonly className: string;
-    dispatch(action: Actions.Action): Actions.Action;
-}
-
-export function MonthComponent(props: MonthComponentProps) {
-    const {year, month} = props;
-    const monthKey = getMonthKey({year, month});
-    const notes = props.notes[monthKey];
-    const weeks = getWeeks(year, month);
-
-    return (
-        <table id={monthKey} className={props.className}>
-            <caption>{getMonthName(month)} {year}</caption>
-            <tbody>
-                {weeks.map((w, i) =>
-                    <WeekComponent
-                        key={i}
-                        year={year}
-                        month={month}
-                        week={w}
-                        notes={notes}
-                        dispatch={props.dispatch}
-                    />
-                )}
-            </tbody>
-        </table>
-    );
 }

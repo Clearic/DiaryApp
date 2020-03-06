@@ -1,0 +1,15 @@
+.scroller {
+    position: relative;
+}
+
+.scroller-item {
+    position: absolute;
+    left: 0;
+    right: 0;
+    margin: 0;
+    padding: 0;
+}
+
+.scroller-item-loader {
+    background-color: silver;
+}
