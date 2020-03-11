@@ -1,5 +1,5 @@
 import * as React from "react";
-import { DayNotes } from "../store";
+import { DayNotes } from "../types";
 import * as Actions from "../actions";
 import { getDayKey, getCurrentDateTime, isDayLess } from "../date";
 import { NoteComponent } from "./Note";

@@ -1,4 +1,4 @@
-import { Note, Month, DateTime } from "./store";
+import { Note, Month, DateTime } from "./types";
 
 export const NEW_NOTE = "NewNote";
 

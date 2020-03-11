@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Note } from "../store";
+import { Note } from "../types";
 import * as Actions from "../actions";
 import { isEmptyOrSpaces, getTitle } from "../utils";
 

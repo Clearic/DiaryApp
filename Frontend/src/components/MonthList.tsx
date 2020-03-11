@@ -1,7 +1,7 @@
 import * as React from "react";
 import { connect } from "react-redux";
 import { MonthComponent } from "./Month";
-import { ApplicationState, Month, MonthNotes, DayNotes } from "../store";
+import { ApplicationState, Month, MonthNotes, DayNotes } from "../types";
 import * as Actions from "../actions";
 import * as Thunks from "../thunks";
 import {

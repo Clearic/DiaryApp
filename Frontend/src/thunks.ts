@@ -1,4 +1,4 @@
-import { Note, Month, DateTime, ApplicationState } from "./store";
+import { Note, Month, DateTime, ApplicationState } from "./types";
 import * as Actions from "./actions";
 import * as api from "./api";
 

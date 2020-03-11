@@ -1,7 +1,7 @@
 import * as React from "react";
 import * as Actions from "../../actions";
 import * as Thunks from "../../thunks";
-import { DateTime } from "../../store";
+import { DateTime } from "../../types";
 import { isEmptyOrSpaces, getTitle } from "../../utils";
 import { dateToFromStr, timeToFromStr, parseFormDate, parseFormTime, isFutureDate} from "../../date";
 import { DialogWithExpander } from "./DialogWithExpander";

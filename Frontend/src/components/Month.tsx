@@ -1,5 +1,5 @@
 import * as React from "react";
-import { MonthNotes, DayNotes } from "../store";
+import { MonthNotes, DayNotes } from "../types";
 import * as Actions from "../actions";
 import { getMonthKey, getMonthName } from "../date";
 import { DayComponent } from "./Day";

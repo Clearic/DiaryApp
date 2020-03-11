@@ -1,4 +1,4 @@
-import { Note, Month, DateTime } from "./store";
+import { Note, Month, DateTime } from "./types";
 import { getDaysInMonth, dateTimeToStr, parseDateTime } from "./date";
 
 export async function getNotes(month: Month) {

@@ -1,4 +1,4 @@
-import { Note, MonthNotes, DayNotes, Day } from "../store";
+import { Note, MonthNotes, DayNotes, Day } from "../types";
 import { Action, LOAD_NOTES_SUCCESS, CREATE_NOTE_SUCCESS, UPDATE_NOTE_SUCCESS, DELETE_NOTE_SUCCESS } from "../actions";
 import { Reducer } from "redux";
 import { getMonthKey, getDayKey, isDateTimeEqual, isDateTimeLess } from "../date";

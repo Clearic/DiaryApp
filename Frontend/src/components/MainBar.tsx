@@ -1,6 +1,6 @@
 import * as React from "react";
 import { connect } from "react-redux";
-import { ApplicationState } from "../store";
+import { ApplicationState } from "../types";
 import * as Actions from "../actions";
 import { getMonthName, getDayOfWeekName } from "../date";
 

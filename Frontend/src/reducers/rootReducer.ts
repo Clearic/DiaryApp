@@ -1,5 +1,5 @@
 import { Reducer, combineReducers } from "redux";
-import { ApplicationState } from "../store";
+import { ApplicationState } from "../types";
 import { Action, SCROLL_TO_CURRENT_WEEK } from "../actions";
 import { notesReducer } from "./notesReducer";
 import { dialogReducer } from "./dialogReducer";

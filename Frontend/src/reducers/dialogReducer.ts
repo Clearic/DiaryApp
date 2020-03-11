@@ -1,4 +1,4 @@
-import { Dialog, NoDialog, CreateNoteDialog, EditNoteDialog } from "../store";
+import { Dialog, NoDialog, CreateNoteDialog, EditNoteDialog } from "../types";
 import { Action, NEW_NOTE, OPEN_NOTE, CLOSE_DIALOG } from "../actions";
 import { Reducer } from "redux";
 import { getCurrentDateTime } from "../date";

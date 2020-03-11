@@ -1,4 +1,4 @@
-import { Month, Day, DateTime, Time } from "./store";
+import { Month, Day, DateTime, Time } from "./types";
 
 // Month
 

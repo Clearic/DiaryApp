@@ -1,7 +1,7 @@
 import * as React from "react";
 import { connect } from "react-redux";
 import * as Actions from "../../actions";
-import { ApplicationState, Dialog } from "../../store";
+import { ApplicationState, Dialog } from "../../types";
 import { CreateNoteDialogComponenet } from "./CreateNoteDialog";
 import { EditNoteDialogComponenet } from "./EditNoteDialog";
 
