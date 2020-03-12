@@ -1,33 +1,21 @@
 import * as React from "react";
-import { connect } from "react-redux";
-import * as Actions from "../../actions";
-import { ApplicationState, Dialog } from "../../types";
+import { useSelector } from "react-redux";
+import { ApplicationState } from "../../types";
 import { CreateNoteDialogComponenet } from "./CreateNoteDialog";
 import { EditNoteDialogComponenet } from "./EditNoteDialog";
 
-interface DialogProps {
-    dispatch(action: Actions.Action): Actions.Action;
-    dialog: Dialog;
-}
-
-function DialogComponent(props: DialogProps) {
-    const {dialog, dispatch} = props;
+export const DialogComponent: React.FC = () => {
+    const dialog = useSelector((state: ApplicationState) => state.dialog);
 
     switch (dialog.type) {
         case "NoDialog":
             return <div />;
         case "CreateNoteDialog":
-            return <CreateNoteDialogComponenet date={dialog.date} dispatch={dispatch} />;
+            return <CreateNoteDialogComponenet date={dialog.date} />;
         case "EditNoteDialog":
-            return <EditNoteDialogComponenet note={dialog.note} dispatch={dispatch} />;
+            return <EditNoteDialogComponenet note={dialog.note} />;
         default:
             const exhaustiveCheck: never = dialog;
             return exhaustiveCheck;
     }
 }
-
-const mapStateToProps = (state: ApplicationState) => {
-    return {dialog: state.dialog};
-}
-
-export const DialogContainer = connect(mapStateToProps)(DialogComponent);

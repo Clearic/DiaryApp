@@ -1,18 +1,10 @@
 import * as React from "react";
-import { connect } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { MonthComponent } from "./Month";
-import { ApplicationState, Month, MonthNotes, DayNotes } from "../types";
-import * as Actions from "../actions";
+import { ApplicationState, DayNotes } from "../types";
 import * as Thunks from "../thunks";
 import {
-    getCurrentMonth,
-    getPrevMonth,
-    getNextMonth,
-    getMonthKey,
-    isMonthGreater,
-    isMonthLess,
-    getWeekOfMonth
-} from "../date";
+    getMonthKey} from "../date";
 import { Scroller } from "./Scroller";
 
 interface YearMonth {
@@ -25,7 +17,7 @@ function yearMonthToIndex(year: number, month: number): number;
 function yearMonthToIndex(yearMonth: YearMonth): number;
 function yearMonthToIndex(year: number | YearMonth, month?: number): number {
     if (typeof year === "object") {
-        return yearMonthToIndex(year.year, year.year);
+        return yearMonthToIndex(year.year, year.month);
     }
 
     if (month == null || month < 1 || month > 12) {
@@ -50,13 +42,11 @@ const startIndex = dateToIndex(new Date());
 
 const emptyNotes: DayNotes = {};
 
-interface MonthListComponentProps {
-    readonly notes: MonthNotes;
-    readonly scrollToCurrentMonth: number;
-    dispatch(action: Actions.Action | Thunks.ThunkAction): Actions.Action;
-}
+export const MonthListComponent: React.FC = () => {
+    const dispatch = useDispatch();
 
-export const MonthListComponent: React.FC<MonthListComponentProps> = ({ notes, dispatch }) => {
+    const notes = useSelector((state: ApplicationState) => state.notes)
+
     const getItemData = (index: number): DayNotes => {
         // no notes for future dates cause they cannot be created
         if (index > startIndex) {
@@ -69,10 +59,7 @@ export const MonthListComponent: React.FC<MonthListComponentProps> = ({ notes, d
     }
 
     const renderItem = (notes: DayNotes, index: number): React.ReactElement => {
-        return <MonthComponent
-            {...indexToYearMonth(index)}
-            notes={notes}
-            dispatch={dispatch} />;
+        return <MonthComponent {...indexToYearMonth(index)} notes={notes} />;
     }
 
     const load = (index: number) => {
@@ -88,12 +75,3 @@ export const MonthListComponent: React.FC<MonthListComponentProps> = ({ notes, d
             load={load} />
     );
 }
-
-function mapStateToProps(state: ApplicationState) {
-    return {
-        notes: state.notes,
-        scrollToCurrentMonth: state.scrollToCurrentMonth
-    };
-}
-
-export const MonthListContainer = connect(mapStateToProps)(MonthListComponent);

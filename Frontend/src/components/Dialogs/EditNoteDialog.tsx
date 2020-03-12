@@ -1,4 +1,5 @@
 import * as React from "react";
+import { useDispatch } from "react-redux";
 import * as Actions from "../../actions";
 import * as Thunks from "../../thunks";
 import { Note, DateTime } from "../../types";
@@ -10,10 +11,10 @@ import { LabeledField } from "./LabeledField";
 
 export interface EditNoteDialogProps {
     readonly note: Note;
-    dispatch(action: Actions.Action | Thunks.ThunkAction): Actions.Action;
 }
 
 export const EditNoteDialogComponenet: React.FC<EditNoteDialogProps> = (props) => {
+    const dispatch = useDispatch();
     const [text, setText] = React.useState(props.note.text);
     const [date, setDate] = React.useState(dateToFromStr(props.note.date));
     const [time, setTime] = React.useState(timeToFromStr(props.note.date));
@@ -28,12 +29,12 @@ export const EditNoteDialogComponenet: React.FC<EditNoteDialogProps> = (props) =
         setTime(el.currentTarget.value);
     }
     const handleCloseClick = () => {
-        props.dispatch(Actions.closeDialog());
+        dispatch(Actions.closeDialog());
     }
     const handleDeleteClick = () => {
         if (confirm("Are you sure you want to delete?")) {
-            props.dispatch(Actions.closeDialog());
-            props.dispatch(Thunks.deleteNote(props.note));
+            dispatch(Actions.closeDialog());
+            dispatch(Thunks.deleteNote(props.note));
         }
     }
     const handleSaveClick = () => {
@@ -45,8 +46,8 @@ export const EditNoteDialogComponenet: React.FC<EditNoteDialogProps> = (props) =
             date: dt,
             text: text
         };
-        props.dispatch(Thunks.updateNote(note, props.note.date));
-        props.dispatch(Actions.closeDialog());
+        dispatch(Thunks.updateNote(note, props.note.date));
+        dispatch(Actions.closeDialog());
     }
 
     const d = parseFormDate(date);

@@ -1,4 +1,5 @@
 import * as React from "react";
+import { useDispatch } from "react-redux";
 import { Note } from "../types";
 import * as Actions from "../actions";
 import { isEmptyOrSpaces, getTitle } from "../utils";
@@ -34,16 +35,16 @@ function getSnippet(text: string): string | undefined {
 
 export interface NoteComponentProps {
     readonly note: Note;
-    dispatch(action: Actions.Action): Actions.Action;
 }
 
 export function NoteComponent(props: NoteComponentProps) {
+    const dispatch = useDispatch();
     const title = getTitle(props.note.text) || "<Untitled>";
     const snippet = getSnippet(props.note.text);
 
     const handleClick = (e: React.FormEvent<HTMLDivElement>) => {
         e.preventDefault();
-        props.dispatch(Actions.openNote(props.note));
+        dispatch(Actions.openNote(props.note));
     };
 
     return (

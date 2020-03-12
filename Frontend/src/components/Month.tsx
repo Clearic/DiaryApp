@@ -1,17 +1,15 @@
 import * as React from "react";
-import { MonthNotes, DayNotes } from "../types";
-import * as Actions from "../actions";
-import { getMonthKey, getMonthName } from "../date";
+import { DayNotes } from "../types";
+import { getMonthName } from "../date";
 import { DayComponent } from "./Day";
 
 interface MonthProps {
     readonly year: number;
     readonly month: number;
     readonly notes: DayNotes;
-    dispatch(action: Actions.Action): Actions.Action;
 }
 
-export const MonthComponent: React.FC<MonthProps> = ({ year, month, notes, dispatch }) => {
+export const MonthComponent: React.FC<MonthProps> = ({ year, month, notes }) => {
     const weeks = getWeeks(year, month);
 
     return (
@@ -27,7 +25,6 @@ export const MonthComponent: React.FC<MonthProps> = ({ year, month, notes, dispa
                                 month={month}
                                 day={day}
                                 notes={notes}
-                                dispatch={dispatch}
                             />)}
                     </tr>
                 )}

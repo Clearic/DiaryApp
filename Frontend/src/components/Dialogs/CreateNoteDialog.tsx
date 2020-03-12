@@ -1,4 +1,5 @@
 import * as React from "react";
+import { useDispatch } from "react-redux";
 import * as Actions from "../../actions";
 import * as Thunks from "../../thunks";
 import { DateTime } from "../../types";
@@ -10,10 +11,10 @@ import { LabeledField } from "./LabeledField";
 
 export interface CreateNoteDialogProps {
     readonly date: DateTime;
-    dispatch(action: Actions.Action | Thunks.ThunkAction): Actions.Action;
 }
 
 export const CreateNoteDialogComponenet: React.FC<CreateNoteDialogProps> = (props) => {
+    const dispatch = useDispatch();
     const [text, setText] = React.useState("");
     const [date, setDate] = React.useState(dateToFromStr(props.date));
     const [time, setTime] = React.useState(timeToFromStr(props.date));
@@ -31,11 +32,11 @@ export const CreateNoteDialogComponenet: React.FC<CreateNoteDialogProps> = (prop
         if (!d || !t)
             return;
         const dt: DateTime = { ...d, ...t };
-        props.dispatch(Thunks.createNote(dt, text));
-        props.dispatch(Actions.closeDialog());
+        dispatch(Thunks.createNote(dt, text));
+        dispatch(Actions.closeDialog());
     }
     const handleCloseClick = () => {
-        props.dispatch(Actions.closeDialog());
+        dispatch(Actions.closeDialog());
     }
 
     const isDirty = !isEmptyOrSpaces(text);
