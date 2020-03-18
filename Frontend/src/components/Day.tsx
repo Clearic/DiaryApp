@@ -1,6 +1,6 @@
 import * as React from "react";
 import { useDispatch } from "react-redux";
-import { DayNotes } from "../types";
+import { MonthNotes } from "../types";
 import * as Actions from "../actions";
 import { getDayKey, getCurrentDateTime, isDayLess } from "../date";
 import { NoteComponent } from "./Note";
@@ -9,7 +9,7 @@ export interface DayComponentProps {
     readonly year: number;
     readonly month: number;
     readonly day: number | undefined;
-    readonly notes: DayNotes | undefined;
+    readonly notes: MonthNotes | undefined;
 }
 
 export function DayComponent(props: DayComponentProps) {

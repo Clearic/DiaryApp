@@ -1,4 +1,4 @@
-import { Note, Month, DateTime, ApplicationState } from "./types";
+import { Note, YearMonth, DateTime, ApplicationState } from "./types";
 import * as Actions from "./actions";
 import * as api from "./api";
 
@@ -13,7 +13,7 @@ function getNewRequestID() {
     return ++lastRequestID;
 }
 
-export const loadNotes = (month: Month): ThunkAction => {
+export const loadNotes = (month: YearMonth): ThunkAction => {
     return (dispatch) => {
         const reqID = getNewRequestID();
         dispatch(Actions.loadNotesRequest(reqID, month));

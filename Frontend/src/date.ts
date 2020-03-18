@@ -1,15 +1,15 @@
-import { Month, Day, DateTime, Time } from "./types";
+import { YearMonth, YearMonthDay, DateTime, Time } from "./types";
 
 // Month
 
-export function getCurrentMonth(): Month {
+export function getCurrentMonth(): YearMonth {
     const today = new Date();
     const year = today.getFullYear();
     const month = today.getMonth() + 1;
     return {year, month};
 }
 
-export function getPrevMonth(fromMonth: Month): Month {
+export function getPrevMonth(fromMonth: YearMonth): YearMonth {
     let {year, month} = fromMonth;
     month--;
     if (month < 1) {
@@ -19,7 +19,7 @@ export function getPrevMonth(fromMonth: Month): Month {
     return {year, month};
 }
 
-export function getNextMonth(fromMonth: Month): Month {
+export function getNextMonth(fromMonth: YearMonth): YearMonth {
     let {year, month} = fromMonth;
     month++;
     if (month > 12) {
@@ -29,11 +29,11 @@ export function getNextMonth(fromMonth: Month): Month {
     return {year, month};
 }
 
-export function isMonthEqual(month1: Month, month2: Month): boolean {
+export function isMonthEqual(month1: YearMonth, month2: YearMonth): boolean {
     return month1.year === month2.year && month1.month === month2.month;
 }
 
-export function isMonthGreater(month1: Month, month2: Month): boolean {
+export function isMonthGreater(month1: YearMonth, month2: YearMonth): boolean {
     if (month1.year > month2.year)
         return true;
 
@@ -44,7 +44,7 @@ export function isMonthGreater(month1: Month, month2: Month): boolean {
     return false;
 }
 
-export function isMonthLess(month1: Month, month2: Month): boolean {
+export function isMonthLess(month1: YearMonth, month2: YearMonth): boolean {
     if (month1.year < month2.year)
         return true;
 
@@ -55,7 +55,7 @@ export function isMonthLess(month1: Month, month2: Month): boolean {
     return false;
 }
 
-export function getMonthKey({year, month}: Month): string {
+export function getMonthKey({year, month}: YearMonth): string {
     let result = "";
     if (year < 1000)
         throw Error("Years less than 1000 not supported");
@@ -77,14 +77,14 @@ export function getMonthName(month: number): string {
     return monthNames[month - 1];
 }
 
-function getMonthOffset(month: Month) {
+function getMonthOffset(month: YearMonth) {
     const day = new Date(month.year, month.month - 1);
     let offset = day.getDay();
     offset = (offset + 6) % 7; // make monday first day of week
     return offset;
 }
 
-export function getWeekOfMonth(month: Month, day: number) {
+export function getWeekOfMonth(month: YearMonth, day: number) {
     const offset = getMonthOffset(month);
     const normalizedDay = Math.max(0, day + offset) - 1;
     return Math.floor(normalizedDay / 7) + 1;
@@ -92,13 +92,13 @@ export function getWeekOfMonth(month: Month, day: number) {
 
 // Day
 
-export function isDayEqual(day1: Day, day2: Day): boolean {
+export function isDayEqual(day1: YearMonthDay, day2: YearMonthDay): boolean {
     return day1.year === day2.year &&
         day1.month === day2.month &&
         day1.day === day2.day;
 }
 
-export function isDayLess(day1: Day, day2: Day): boolean {
+export function isDayLess(day1: YearMonthDay, day2: YearMonthDay): boolean {
     if (day1.year < day2.year)
         return true;
 
@@ -113,7 +113,7 @@ export function isDayLess(day1: Day, day2: Day): boolean {
     return false;
 }
 
-export function isDayGreater(day1: Day, day2: Day): boolean {
+export function isDayGreater(day1: YearMonthDay, day2: YearMonthDay): boolean {
     if (day1.year > day2.year)
         return true;
 
@@ -128,11 +128,11 @@ export function isDayGreater(day1: Day, day2: Day): boolean {
     return false;
 }
 
-export function getDayKey(day: Day) {
+export function getDayKey(day: YearMonthDay) {
     return `${day.year}-${day.month}-${day.day}`;
 }
 
-export function parseDayKey(key: string): Day {
+export function parseDayKey(key: string): YearMonthDay {
     const regex = /(\d+)-(\d+)-(\d+)/;
     const m = regex.exec(key);
     if (!m)
@@ -143,7 +143,7 @@ export function parseDayKey(key: string): Day {
     return {year, month, day};
 }
 
-export function getDaysInMonth(month: Month): number {
+export function getDaysInMonth(month: YearMonth): number {
     return new Date(month.year, month.month, 0).getDate();
 }
 
@@ -206,7 +206,7 @@ export function isDateTimeLess(dt1: DateTime, dt2: DateTime) {
     return false;
 }
 
-export const isFutureDate = (date: Day): boolean => {
+export const isFutureDate = (date: YearMonthDay): boolean => {
     return isDayGreater(date, getCurrentDateTime());
 }
 
@@ -234,13 +234,13 @@ export function dateTimeToStr(date: DateTime): string {
 
 // Form Date and Time
 
-export function dateToFromStr(date: Day) {
+export function dateToFromStr(date: YearMonthDay) {
     const month = date.month < 10 ? `0${date.month}` : `${date.month}`;
     const day = date.day < 10 ? `0${date.day}` : `${date.day}`;
     return `${date.year}-${month}-${day}`;
 }
 
-export function parseFormDate(str: string): Day | null {
+export function parseFormDate(str: string): YearMonthDay | null {
     const regex = /(\d+)-(\d+)-(\d+)/;
     const m = regex.exec(str);
     if (!m)

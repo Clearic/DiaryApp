@@ -1,7 +1,7 @@
-import { Note, Month, DateTime } from "./types";
+import { Note, YearMonth, DateTime } from "./types";
 import { getDaysInMonth, dateTimeToStr, parseDateTime } from "./date";
 
-export async function getNotes(month: Month) {
+export async function getNotes(month: YearMonth) {
     const from = `${month.year}-${month.month}-1`;
     const to = `${month.year}-${month.month}-${getDaysInMonth(month)}`;
 

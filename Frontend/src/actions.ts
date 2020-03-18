@@ -1,4 +1,4 @@
-import { Note, Month, DateTime } from "./types";
+import { Note, YearMonth, DateTime } from "./types";
 
 export const NEW_NOTE = "NewNote";
 
@@ -43,7 +43,7 @@ export function scrollToCurrentWeek() {
 
 export const LOAD_NOTES_REQUEST = "LoadNotesRequest";
 
-export function loadNotesRequest(reqID: number, month: Month) {
+export function loadNotesRequest(reqID: number, month: YearMonth) {
     return {
         type: LOAD_NOTES_REQUEST,
         reqID, month
@@ -52,7 +52,7 @@ export function loadNotesRequest(reqID: number, month: Month) {
 
 export const LOAD_NOTES_SUCCESS = "LoadNotesSuccess";
 
-export function loadNotesSuccess(reqID: number, month: Month, notes: Note[]) {
+export function loadNotesSuccess(reqID: number, month: YearMonth, notes: Note[]) {
     return {
         type: LOAD_NOTES_SUCCESS,
         reqID, month, notes

@@ -1,7 +1,7 @@
 import * as React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { MonthComponent } from "./Month";
-import { ApplicationState, DayNotes } from "../types";
+import { ApplicationState, MonthNotes } from "../types";
 import * as Thunks from "../thunks";
 import {
     getMonthKey} from "../date";
@@ -40,14 +40,14 @@ function dateToIndex(date: Date) {
 
 const startIndex = dateToIndex(new Date());
 
-const emptyNotes: DayNotes = {};
+const emptyNotes: MonthNotes = {};
 
 export const MonthListComponent: React.FC = () => {
     const dispatch = useDispatch();
 
     const notes = useSelector((state: ApplicationState) => state.notes)
 
-    const getItemData = (index: number): DayNotes => {
+    const getItemData = (index: number): MonthNotes | undefined => {
         // no notes for future dates cause they cannot be created
         if (index > startIndex) {
             return emptyNotes;
@@ -58,7 +58,7 @@ export const MonthListComponent: React.FC = () => {
         return notes[monthKey];
     }
 
-    const renderItem = (notes: DayNotes, index: number): React.ReactElement => {
+    const renderItem = (notes: MonthNotes, index: number): React.ReactElement => {
         return <MonthComponent {...indexToYearMonth(index)} notes={notes} />;
     }
 

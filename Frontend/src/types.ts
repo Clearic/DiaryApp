@@ -1,11 +1,11 @@
 import { Action } from "./actions";
 
-export interface Month {
+export interface YearMonth {
     readonly year: number;
     readonly month: number;
 }
 
-export interface Day {
+export interface YearMonthDay {
     readonly year: number;
     readonly month: number;
     readonly day: number;
@@ -16,8 +16,7 @@ export interface Time {
     readonly minutes: number;
 }
 
-export interface DateTime extends Day, Time {
-}
+export interface DateTime extends YearMonthDay, Time { }
 
 export interface Note {
     readonly id: number;
@@ -25,12 +24,14 @@ export interface Note {
     readonly text: string;
 }
 
-export interface DayNotes {
-    readonly [day: string]: ReadonlyArray<Note>;
-}
+export type DayNotes = readonly Note[];
 
 export interface MonthNotes {
-    readonly [month: string]: DayNotes;
+    readonly [day: string]: DayNotes | undefined;
+}
+
+export interface Notes {
+    readonly [month: string]: MonthNotes | undefined;
 }
 
 export interface NoDialog {
@@ -51,7 +52,7 @@ export type Dialog = NoDialog | CreateNoteDialog | EditNoteDialog;
 
 export interface ApplicationState {
     readonly scrollToCurrentMonth: number;
-    readonly notes: MonthNotes;
+    readonly notes: Notes;
     readonly dialog: Dialog;
-    readonly requests: ReadonlyArray<Action>;
+    readonly requests: readonly Action[];
 }

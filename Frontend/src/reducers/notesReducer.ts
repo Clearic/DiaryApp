@@ -1,9 +1,9 @@
-import { Note, MonthNotes, DayNotes, Day } from "../types";
+import { Note, Notes, MonthNotes, YearMonthDay } from "../types";
 import { Action, LOAD_NOTES_SUCCESS, CREATE_NOTE_SUCCESS, UPDATE_NOTE_SUCCESS, DELETE_NOTE_SUCCESS } from "../actions";
 import { Reducer } from "redux";
 import { getMonthKey, getDayKey, isDateTimeEqual, isDateTimeLess } from "../date";
 
-function makeDayNotes(notes: ReadonlyArray<Note>): DayNotes {
+function makeDayNotes(notes: ReadonlyArray<Note>): MonthNotes {
     const result: {[day: string]: Note[]} = {};
     notes.forEach(note => {
         const arr = result[getDayKey(note.date)];
@@ -27,7 +27,7 @@ function sortNotesByDate(notes: Note[]) {
     });
 }
 
-function addNote(state: DayNotes = {}, note: Note) {
+function addNote(state: MonthNotes = {}, note: Note) {
     const dayKey = getDayKey(note.date);
     let notes = (state[dayKey] || []) as Note[];
     notes = [...notes, note];
@@ -35,14 +35,14 @@ function addNote(state: DayNotes = {}, note: Note) {
     return {...state, [dayKey]: notes};
 }
 
-function removeNote(state: DayNotes = {}, id: number, date: Day) {
+function removeNote(state: MonthNotes = {}, id: number, date: YearMonthDay) {
     const dayKey = getDayKey(date);
     let notes = state[dayKey] || [];
     notes = notes.filter(x => x.id !== id);
     return {...state, [dayKey]: notes};
 }
 
-export const notesReducer: Reducer<MonthNotes> = (state: MonthNotes = {}, action: Action) => {
+export const notesReducer: Reducer<Notes> = (state: Notes = {}, action: Action) => {
     switch (action.type) {
         case LOAD_NOTES_SUCCESS: {
             const monthKey = getMonthKey(action.month);

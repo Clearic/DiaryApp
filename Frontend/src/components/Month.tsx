@@ -1,12 +1,12 @@
 import * as React from "react";
-import { DayNotes } from "../types";
+import { MonthNotes } from "../types";
 import { getMonthName } from "../date";
 import { DayComponent } from "./Day";
 
 interface MonthProps {
     readonly year: number;
     readonly month: number;
-    readonly notes: DayNotes;
+    readonly notes: MonthNotes;
 }
 
 export const MonthComponent: React.FC<MonthProps> = ({ year, month, notes }) => {

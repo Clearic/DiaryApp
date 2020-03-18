@@ -4,14 +4,14 @@ import { Provider } from "react-redux";
 import { configureStore } from "./configureStore";
 import { loadNotesSuccess } from "./actions";
 import { RootComponent } from "./components/Root";
-import { Note, Month } from "./types";
+import { Note, YearMonth } from "./types";
 import { parseDateTime } from "./date";
 import "../scss/all.scss";
 
 const store = configureStore();
 
 interface InitData {
-    readonly month: Month;
+    readonly month: YearMonth;
     readonly notes: Note[];
 }
 
