@@ -2,7 +2,8 @@ import * as React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { ApplicationState } from "../types";
 import * as Actions from "../actions";
-import { getMonthName, getDayOfWeekName } from "../date";
+import { getMonthName } from "../month";
+import { getDayOfWeekName } from "../day-of-week";
 
 export const MainBarComponent: React.FC = () => {
     const dispatch = useDispatch();

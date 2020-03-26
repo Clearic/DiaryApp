@@ -4,10 +4,12 @@ import * as Actions from "../../actions";
 import * as Thunks from "../../thunks";
 import { Note, DateTime } from "../../types";
 import { getTitle } from "../../utils";
-import { dateToFromStr, timeToFromStr, isDateTimeEqual, parseFormDate, parseFormTime, isFutureDate } from "../../date";
 import { DialogWithExpander } from "./DialogWithExpander";
 import { MenuDialogComponent } from "./MenuDialog";
 import { LabeledField } from "./LabeledField";
+import { isDateTimeEqual } from "../../date-time";
+import { toFormDate, toFormTime, parseFormDate, parseFormTime } from "../../form-date-time";
+import { isFutureDate } from "../../year-month-day";
 
 export interface EditNoteDialogProps {
     readonly note: Note;
@@ -16,8 +18,8 @@ export interface EditNoteDialogProps {
 export const EditNoteDialogComponenet: React.FC<EditNoteDialogProps> = (props) => {
     const dispatch = useDispatch();
     const [text, setText] = React.useState(props.note.text);
-    const [date, setDate] = React.useState(dateToFromStr(props.note.date));
-    const [time, setTime] = React.useState(timeToFromStr(props.note.date));
+    const [date, setDate] = React.useState(toFormDate(props.note.date));
+    const [time, setTime] = React.useState(toFormTime(props.note.date));
 
     const handleTextChange = (el: React.FormEvent<HTMLTextAreaElement>) => {
         setText(el.currentTarget.value);

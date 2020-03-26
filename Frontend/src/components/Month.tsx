@@ -1,7 +1,7 @@
 import * as React from "react";
 import { MonthNotes } from "../types";
-import { getMonthName } from "../date";
 import { DayComponent } from "./Day";
+import { getMonthName } from "../month";
 
 interface MonthProps {
     readonly year: number;

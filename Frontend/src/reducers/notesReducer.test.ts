@@ -1,11 +1,12 @@
 import { notesReducer } from "./notesReducer";
 import { loadNotesSuccess, createNoteSuccess, updateNoteSuccess, deleteNoteSuccess } from "../actions";
-import { getMonthKey, getDayKey } from "../date";
+import * as YM from "../year-month";
+import * as YMD from "../year-month-day";
 
 describe("notesReducer", () => {
     const reducer = notesReducer;
-    const km = (year: number, month: number) => getMonthKey({ year, month });
-    const kd = (year: number, month: number, day: number) => getDayKey({ year, month, day });
+    const km = (year: number, month: number) => YM.getKey({ year, month });
+    const kd = (year: number, month: number, day: number) => YMD.getKey({ year, month, day });
     const mkD = (year: number, month: number, day: number) => ({ year, month, day });
     const mkDT = (year: number, month: number, day: number, hours: number, minutes: number) => ({ year, month, day, hours, minutes });
     const mkNote = (id: number, date: ReturnType<typeof mkDT>, text: string) => ({ id, date, text });

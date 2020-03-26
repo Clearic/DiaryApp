@@ -3,8 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { MonthComponent } from "./Month";
 import { ApplicationState, MonthNotes } from "../types";
 import * as Thunks from "../thunks";
-import {
-    getMonthKey} from "../date";
+import * as YM from "../year-month";
 import { Scroller } from "./Scroller";
 
 interface YearMonth {
@@ -54,7 +53,7 @@ export const MonthListComponent: React.FC = () => {
         }
 
         const month = indexToYearMonth(index);
-        const monthKey = getMonthKey(month);
+        const monthKey = YM.getKey(month);
         return notes[monthKey];
     }
 

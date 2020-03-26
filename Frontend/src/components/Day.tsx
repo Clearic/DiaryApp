@@ -2,8 +2,9 @@ import * as React from "react";
 import { useDispatch } from "react-redux";
 import { MonthNotes } from "../types";
 import * as Actions from "../actions";
-import { getDayKey, getCurrentDateTime, isDayLess } from "../date";
 import { NoteComponent } from "./Note";
+import * as YMD from "../year-month-day";
+import { getCurrentDateTime } from "../date-time";
 
 export interface DayComponentProps {
     readonly year: number;
@@ -20,14 +21,14 @@ export function DayComponent(props: DayComponentProps) {
         return <td className="null"></td>;
     }
 
-    if (isDayLess(getCurrentDateTime(), { year, month, day })) {
+    if (YMD.isLess(getCurrentDateTime(), { year, month, day })) {
         return <td>{day}</td>;
     }
 
     let notes;
 
     if (props.notes) {
-        const date = getDayKey({ year, month, day });
+        const date = YMD.getKey({ year, month, day });
         notes = props.notes[date];
     }
 

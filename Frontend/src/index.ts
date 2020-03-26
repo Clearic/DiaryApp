@@ -5,7 +5,7 @@ import { configureStore } from "./configureStore";
 import { loadNotesSuccess } from "./actions";
 import { RootComponent } from "./components/Root";
 import { Note, YearMonth } from "./types";
-import { parseDateTime } from "./date";
+import * as DT from "./date-time";
 import "../scss/all.scss";
 
 const store = configureStore();
@@ -20,7 +20,7 @@ declare const initData: InitData | undefined;
 if (typeof initData !== "undefined") {
     for (let i = 0; i < initData.notes.length; i++) {
         const note = initData.notes[i] as any;
-        note.date = parseDateTime(note.date);
+        note.date = DT.parse(note.date);
     }
     store.dispatch(loadNotesSuccess(0, initData.month, initData.notes));
 }
