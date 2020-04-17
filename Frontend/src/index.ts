@@ -6,7 +6,6 @@ import { loadNotesSuccess } from "./actions";
 import { RootComponent } from "./components/Root";
 import { Note, YearMonth } from "./types";
 import * as DT from "./date-time";
-import "../scss/all.scss";
 
 const store = configureStore();
 
