@@ -13,6 +13,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.FileProviders;
+using Microsoft.Extensions.Hosting;
 using Microsoft.Net.Http.Headers;
 
 namespace Backend
@@ -28,20 +29,21 @@ namespace Backend
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDataProtection()
+            services
+                .AddDataProtection()
                 .PersistKeysToFileSystem(new DirectoryInfo(@"AppData"));
 
-            services.AddMvc(config =>
+            services.AddRazorPages();
+
+            services.AddControllers(config =>
             {
                 var policy = new AuthorizationPolicyBuilder()
                                  .RequireAuthenticatedUser()
                                  .Build();
                 config.Filters.Add(new AuthorizeFilter(policy));
-            })
-            .SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+            });
 
-            services.AddDbContext<AppDbContext>(options =>
-                options.UseSqlite(Configuration.GetConnectionString("AppDbContextConnection")));
+            services.AddDbContext<AppDbContext>(options => options.UseSqlite(Configuration.GetConnectionString("AppDbContextConnection")));
 
             services.AddAuthentication(o =>
             {
@@ -81,7 +83,7 @@ namespace Backend
             services.TryAddTransient<INotesRepository, NotesRepository>();
         }
 
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
             {
@@ -100,11 +102,15 @@ namespace Backend
                 app.UseStaticFiles();
             }
 
+            app.UseRouting();
+
             app.UseAuthentication();
+            app.UseAuthorization();
 
-            app.UseMvc(routes =>
+            app.UseEndpoints(endpoints =>
             {
-
+                endpoints.MapControllers();
+                endpoints.MapRazorPages();
             });
         }
     }
