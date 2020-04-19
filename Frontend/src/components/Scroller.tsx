@@ -21,7 +21,6 @@ export const Scroller = <T extends {}>({ startIndex, getItemData, load, renderIt
     const loadIfNotLoaded = (i: number) => {
         if (!getItemData(i)) {
             load(i);
-            console.log("load", i);
         }
     }
 
@@ -34,16 +33,11 @@ export const Scroller = <T extends {}>({ startIndex, getItemData, load, renderIt
             if ((itemsBottom - itemsTop) - (viewBottom - viewTop) < itemMinHeight) {
                 setIndex(x => x - 1);
                 setMaxItems(x => x + 1);
-                console.log("index", -1);
-                console.log("maxItems", +1);
             } else if (viewTop - itemsTop < 0) {
                 setIndex(x => x - Math.ceil((itemsTop - viewTop) / itemMinHeight));
-                console.log("index", -Math.ceil((itemsTop - viewTop) / itemMinHeight));
-                console.log("scroll", window.scrollY);
                 
             } else if (itemsBottom - viewBottom < 0) {
                 setIndex(x => x + Math.ceil((viewBottom - itemsBottom) / itemMinHeight));
-                console.log("index", Math.ceil((viewBottom - itemsBottom) / itemMinHeight));
             }
         }
     }
