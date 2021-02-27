@@ -1,8 +1,10 @@
 # DiaryApp
 
-This app is my attempt at organizing my life. It displays notes in a calendar like view, so it was easy to keep track of what and when happened. 
+The app for logging your life.
 
 ## Build instructions
+
+Building the app using docker.
 
 ```sh
 docker-compose build
